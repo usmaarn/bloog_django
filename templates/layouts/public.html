@@ -1,0 +1,30 @@
+{% extends 'layouts/base.html' %}
+
+{% block wrapper %}
+
+    {% include 'partials/navbar.html' %}
+
+    <main class="wrapper p-2 md:px-0">
+        {% block content %}
+
+        {% endblock %}
+    </main>
+    
+    <footer class="px-5 py-10 md:px-0 bg-gray-200 ">
+        <section class="wrapper flex flex-col md:flex-row gap-10 items-center justify-between">
+            <ul class="flex gap-5 flex-wrap">
+              <li><a href="#" class="font-black">Blogg</a></li>  
+              <li><a href="#">Write</a></li>  
+              <li><a href="#">About</a></li>  
+              <li><a href="#">Feedback</a></li>  
+              <li><a href="#">Terms</a></li>  
+              <li><a href="#">Policy</a></li>  
+              <li><a href="#">Sign In</a></li>  
+            </ul>
+            <p>
+                &copy;{% now 'Y' %} | All rights Reserved | <a href="https://usmaarn.dev" class="font-black">Dev Usmaarn</a>
+            </p>
+        </section>
+    </footer>
+
+{% endblock %}

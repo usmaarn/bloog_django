@@ -1,0 +1,24 @@
+
+<details class="dropdown">
+    <summary class="cursor-pointer ">
+        {{ user.username }}
+    </summary>
+
+    <div class="dropdown-wrapper">
+        <ul class="dropdown-menu">
+            <li><a href="#">Profile</a></li>
+            <hr>
+            <li><a href="#">Articles</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">bookmarks</a></li>
+            <li><a href="#">new article</a></li>
+            <hr>
+            <li>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="logout">logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</details>

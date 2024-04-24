@@ -1,0 +1,17 @@
+<header class="px-5 md:px-0 h-16 bg-black text-white ">
+    <nav class="wrapper h-full flex items-center justify-between">
+        <a href="/">Blogg</a>
+
+        <div class="flex items-center gap-5">
+            <a href="{% url 'posts:create' %}">Write</a>
+            <a href="{% url 'tags' %}">Explore</a>
+        
+            {% if user.is_authenticated %}
+                {% include 'partials/user-dropdown.html' %}      
+            {% else %}
+                <a href="{% url 'login' %}">Sign In</a>
+                <a href="{% url 'register' %}" class="px-5 py-2.5 bg-amber-500 text-black rounded-lg shadow font-semibold">Get Started</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>

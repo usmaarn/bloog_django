@@ -1,0 +1,52 @@
+{% extends 'dashboard_layout.html' %}
+
+{% block title %} Posts {% endblock %}
+
+{% block content %}
+	<div class="flex items-center justify-between">
+        <h1 class="text-xl font-bold">Posts</h1>
+
+        <a href="{% url 'dashboard:posts.create' %}" class="px-5 py-3 shadow bg-green-600 rounded font-semibold text-white">+ New Post</a>
+    </div>
+
+    <div class="">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" name="id" id="name" /></th>
+                    <th>Post Title</th>
+                    <th>Post Slug</th>
+                    <th>Post Date</th>
+                    <th>Post Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td class="w-96 overflow-hidden text-ellipsis whitespace-nowrap">
+                            <a href="{% url 'posts:show' post.slug %}" class="text-blue-700 hover:underline">{{ post.title }}</a>
+                        </td>
+                        <td>{{ post.slug }}</td>
+                        <td>{{ post.created_at }}</td>
+                        <td>published</td>
+                        <td class="flex items-center gap-2">
+                            <a href="{% url 'dashboard:posts.update' post.id %}" class="text-blue-500">Edit</a>
+                            <form action="{% url 'dashboard:posts.delete' post.id %}" method="post">
+                                {% csrf_token %}
+                                <button onclick="return confirm('Are you sure?')" class="text-red-500">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% empty %}
+                	<tr>
+                        <td rowspan="5" class="text-center">No Posts Yet...</td>
+                    </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

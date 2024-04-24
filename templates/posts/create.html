@@ -1,0 +1,14 @@
+{% extends "layouts/public.html" %}
+{% block title %} New Post {% endblock title %}
+
+{% block content %}
+    <section class="">
+        <h3 class="text-xl font-bold mt-5">Start Writing</h3>
+        <form action="{% url 'posts:create' %}"  class="form w-full" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <button>Create Post</button>
+        </form>
+        {{ form.media }}
+    </section>
+{% endblock %}

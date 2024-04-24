@@ -1,0 +1,43 @@
+{% extends "layouts/public.html" %}
+
+{% block title %}
+    Blogg | Delete Post
+{% endblock title %}
+
+{% block content %}
+    <section>
+        <div class="max-w-lg mx-auto p-5 border border-red 600 bg-red-100">
+            <h3 class="text-xl text-red-900 mb-3 font-bold">Delete Post</h3>
+            <p>Are you sure you want to delete post?</p>
+            
+            <div class="p-2 bg-red-200 text-red-800 my-2 rounded border border-red-300">
+                <h4 class="text-lg font-bold">
+                    <a href="{% url 'posts:show' post.slug %}">
+                        {{ post.title }}
+                    </a>
+                </h4>
+                <p class="mt-1 font-medium text-sm"><b>Created:</b> {{ post.date }}</p>
+                
+            </div>
+            
+            <div class="mb-5">
+                <h5 class="font-semibold">By deleting this post:</h5>
+                <ul class="list-disc list-inside my-1">
+                    <li>the likes will be deleted</li>
+                    <li>comments and its likes will be deleted</li>
+                    <li>the comment replies and its likes will be deleted</li>
+                    <li>the bookmarks will be deleted</li>
+                    <li>the links to the post will no longer be valid</li>
+                </ul>
+            </div>
+
+            <div class="flex items-center justify-end gap-5">
+                <a href="{% url 'posts:show' post.slug %}" class="px-3 py-2 bg-gray-100 rounded border">No, Go back</a>
+                <form action="{% url 'dashboard:posts.delete' post.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="px-3 py-2 bg-red-600 text-white rounded border-red-900">Yes, Delete</button>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

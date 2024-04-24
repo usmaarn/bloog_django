@@ -1,0 +1,35 @@
+<div id="comments">
+    <h3 class="text-xl font-bold mb-3">Comments</h3>
+    {% for comment in post.comment_set.all %}
+        <div id="comments-{{ comment.id }}" class="flex gap-3 mb-3 border-b pb-3">
+            <div class="">
+                <div class="w-10 h-10 rounded-full bg-gray-300"></div>
+            </div>
+            <div x-data="comment(`{% url 'comment:liked' post.slug comment.id %}`)" class="flex-grow">
+                <h4 class="font-semibold capitalize flex items-center gap-3">
+                    <a href="#" class="text-lg">{{ comment.user.get_full_name }}</a>
+                    <span class="text-gray-500 text-sm"> - {{ comment.date|date:"M d, Y" }}</span>
+                </h4>
+                <div>{{ comment.body|safe }}</div>
+                <div class="flex items-center gap-5">
+                    <form action="{% url 'comment:like' post.slug comment.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="flex items-center text-lg gap-1">
+                            <span data-lucide="thumbs-up" :class="liked && 'liked'"></span>
+                            {{ comment.likes.count }}
+                        </button>
+                    </form>
+                    {% if user.is_authenticated and comment.user == user %}
+                        <a href="{% url 'dashboard:comments.update' comment.id %}">Edit</a>
+                        <form method="post"
+                              action="{% url 'dashboard:comments.delete' comment.id %}">
+                            {% csrf_token %}
+                            <button onclick="return confirm('Are you sure?')">delete</button>
+                        </form>
+                    {% endif %}
+                </div>
+                {% include "replies/index.html" %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,21 @@
+<!-- @format -->
+
+{% extends "layouts/public.html" %}
+
+{% block title %}Post List{% endblock title %} 
+
+{% block content %}
+<section>
+  <h1>My Posts</h1>
+
+  {% for post in posts %}
+  <article class="post" style="margin-bottom: 10px; ">
+    <h1>
+      <a href="{% url 'posts:show' post.slug  %}">{{post.title}}</a>
+    </h1>
+    <p>{{post.created_at}} by {{post.author.username}}</p>
+    <div>{{post.body|truncatewords:20|safe }}</div>
+  </article>
+  {% endfor %}
+</section>
+{% endblock content %}

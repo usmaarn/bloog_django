@@ -1,0 +1,21 @@
+<!-- @format -->
+<!DOCTYPE html>
+{% load vite %}
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Blogg
+      {% endblock title %}
+    </title>
+    {% vite 'src/css/main.css' %}
+  </head>
+  <body>
+        {% block wrapper %}
+        {% endblock wrapper %}
+        {% vite 'src/js/main.js' %}
+  </body>
+</html>

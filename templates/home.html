@@ -1,0 +1,92 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+	Blogg | Homepage
+{% endblock %}
+
+{% block wrapper %}
+	{% include 'partials/header.html' %}
+
+    {% include 'partials/top_stories.html' %}
+
+    <section class="wrapper py-5 md:py-10 grid md:grid-cols-3 gap-10 px-3">
+        <div class="col-span-2">
+            <h3 class="text-xl font-bold mb-5">Most Recent</h3>
+            {% for blog in blogs %}
+                <article class="flex gap-3 py-5 border-b">
+                    <div class="hidden md:block">
+                        <div class="w-48 h-36 bg-gray-100">
+                            <img src="{{ blog.banner.url }}" alt="{{ blog.title }}">
+                        </div>
+                    </div>
+
+                    <div class="flex-grow">
+                        <div class="">
+                            <h4 class="font-semibold hover:underline capitalize">
+                                <a href="#">{{ blog.author.get_full_name }}</a>
+                            </h4>
+                        </div>
+    
+                        <div class="">
+                            <h3 class="font-bold mb-2 text-lg">
+                                <a href="{% url 'posts:show' blog.slug %}" class="hover:underline">{{ blog.title }}</a>
+                            </h3>
+                            <div class="text-sm text-gray-400 hidden md:block">{{ blog.body|safe|truncatewords:10 }}</div>
+                        </div>
+                        <ul class="text-sm flex flex-wrap py-1 gap-3">
+                           {% for tag in blog.tags.all %}
+                           	    <li><a href="{% url 'tags.show' tag.id %}" class="tag">{{ tag.name }}</a></li>
+                           {% endfor %}
+                        </ul>
+    
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm text-gray-400 flex items-center gap-2">
+                                <span>{{ blog.date|date:"M d, Y"}}</span>
+                                <span class="w-1 h-1 inline-block rounded-full bg-gray-200"></span>
+                                <span>{{ blog.read_time }} min read</span>
+                            </p>
+                            <button>
+                                <span data-lucide="bookmark"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                </article>
+            {% endfor %}
+            <div class="text-center">
+                <button class="flex items-center bg-gray-50 border text-sm px-3 py-2 rounded-lg mx-auto">
+                    Load more <span data-lucide="chevrons-right"></span>
+                </button>
+            </div>
+        </div>
+    
+        <div class="space-y-10">
+            <div class="">
+                <h1 class="font-bold mb-5">Top Topics of Discussion</h1>
+                <ul class="space-y-3">
+                    {% for tag in tags %}
+                    	<li><a href="{% url 'tags.show' tag.id %}" class="flex items-center">{{ tag.name }}</a></li>
+                    {% endfor %}
+
+                </ul>
+                <a href="{% url 'tags' %}" class="text-green-600 mt-5 flex items-center">
+                    see more topics <span data-lucide="chevrons-right" class="w-5"></span>
+                </a>
+            </div>
+            <hr />
+            <div class="">
+                <ul class="flex flex-wrap gap-5 text-gray-400">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Career</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Forum</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}

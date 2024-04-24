@@ -1,0 +1,17 @@
+{% extends "layouts/public.html" %}
+
+{% block title %}Blogg | Register {% endblock title %}
+
+{% block content %}
+
+    <section class="max-w-lg mx-auto">
+        <h1 class="text-2xl md:text-3xl my-5 font-semibold">Register to Bloggs</h1>
+
+        <form action="{% url 'register' %}" method="post" class="form">
+            {% csrf_token %}
+            {{form}}
+            <button>Registers</button>
+        </form>
+    </section>
+
+{% endblock content %}

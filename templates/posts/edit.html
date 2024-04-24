@@ -1,0 +1,13 @@
+{% extends "layouts/public.html" %}
+{% block title %} Edit Post {% endblock title %}
+
+{% block content %}
+    <section class="p-5 wrapper">
+        <form action="{% url 'dashboard:posts.update' post.id %}"  class="form w-full" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <button>Update Post</button>
+        </form>
+        {{ form.media }}
+    </section>
+{% endblock %}

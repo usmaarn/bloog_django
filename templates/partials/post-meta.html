@@ -1,0 +1,30 @@
+<div class="flex items-center gap-5 md:gap-8 py-3 my-5 border-t border-b">
+    <form action="{% url "posts:like" post.id %}" method="post">
+        {% csrf_token %}
+        <button class="flex items-center">
+            <span data-lucide="thumbs-up"
+                  {% if liked %}class="liked"{% endif %}></span>
+            <span class="text-lg font-medium">{{ post.likes.count }}</span>
+        </button>
+    </form>
+    <a href="#comments" class="text-lg">{{ post.comment_set.count }} comments</a>
+    <form action="{% url 'posts:bookmark' post.id %}" method="post" class="ml-auto">
+        {% csrf_token %}
+        <button>
+            {% if bookmarked %}
+                <span data-lucide="bookmark" class="bookmarked"></span>
+            {% else %}
+                <span data-lucide="bookmark"></span>
+            {% endif %}
+
+        </button>
+    </form>
+    <a href="#"><span data-lucide="share-2"></span></a>
+</div>
+
+{% if user.is_authenticated and post.author.id == user.id %}
+    <div class="space-x-5 text-right">
+        <a class="text-blue-600" href="{% url 'dashboard:posts.update' post.id %}">Edit Post</a>
+        <a class="text-red-500" href="{% url 'dashboard:posts.delete' post.id %}">Delete Post</a>
+    </div>
+{% endif %}

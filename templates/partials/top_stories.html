@@ -1,0 +1,27 @@
+<section class="wrapper py-10 px-3 md:px-5 border-b">
+    <h4 class="font-bold">Top Stories</h4>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 gap-y-10">
+        {% for story in top_stories %}
+            <article class="">
+                <div class="flex gap-3">
+                    <div class="w-8 h-8 rounded-full bg-gray-300"></div>
+                    <h5 class="font-semibold capitalize">
+                        <a href="#">{{ story.author.get_full_name }}</a>
+                    </h5>
+                </div>
+
+                <h3 class="font-bold my-1">
+                    <a href="{% url 'posts:show' story.slug %}">
+                        {{ story.title }}
+                    </a>
+                </h3>
+                <p class="text-sm text-gray-400 flex items-center gap-3">
+                    <span>{{ story.date|date:"M d, Y" }}</span>
+                    <span class="inline-block w-1 h-1 rounded-full bg-gray-400"></span>
+                    <span>{{ story.read_time }} min read</span>
+                </p>
+            </article>
+        {% endfor %}
+
+    </div>
+</section>

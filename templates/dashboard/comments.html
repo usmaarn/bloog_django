@@ -1,0 +1,52 @@
+ {% extends 'dashboard_layout.html' %}
+
+{% block title %} Comments {% endblock %}
+
+{% block content %}
+	<div class="flex items-center justify-between">
+        <h1 class="text-xl font-bold">Comments</h1>
+    </div>
+
+    <div class="">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" name="id" id="name" /></th>
+                    <th>Comment</th>
+                    <th>Post</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td class="w-64 overflow-hidden text-ellipsis whitespace-nowrap">
+                            <a href="{% url 'posts:show' comment.post.slug %}#comments-{{ comment.id }}"
+                               class="text-blue-700 hover:underline">{{ comment.body }}</a>
+                        </td>
+                        <td class="w-36 overflow-hidden text-ellipsis whitespace-nowrap">
+                            <a href="{% url 'posts:show' comment.post.slug %}"
+                               class="text-blue-700 hover:underline">{{ comment.post.title }}</a>
+                        </td>
+                        <td>{{ comment.created_at }}</td>
+                        <td class="flex items-center gap-2">
+                            <a href="{% url 'dashboard:comments.update' comment.id %}" class="text-blue-500">Edit</a>
+                            <form action="{% url 'dashboard:comments.delete' comment.id %}" method="post">
+                                {% csrf_token %}
+                                <button onclick="return confirm('Are you sure?')" class="text-red-500">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% empty %}
+                	<tr>
+                        <td rowspan="5" class="text-center">No Comments Yet...</td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

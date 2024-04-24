@@ -1,0 +1,19 @@
+<header class="bg-amber-500 border-b border-black">
+    
+    {% include 'partials/navbar.html' %}
+
+    <section class="max-w-screen-lg mx-auto py-20 px-3 md:px-5 flex flex-col items-start">
+        <h1 class="text-5xl sm:text-6xl capitalize font-medium">Discover and Share</h1>
+        <p class="md:w-2/3 mt-5 md:text-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequatur delectus deserunt ea error eveniet nisi quidem ratione voluptatum. Beatae ex incidunt iste magni molestias officia quidem reprehenderit ut velit?</p>
+        
+        {% if user.is_authenticated %}
+            <a href="{% url 'posts:create' %}" class="btn">
+                Start Writing <span data-lucide="move-right" class="stroke-2 stroke-white"></span>
+            </a>
+        {% else %}
+        	<a href="{% url 'register' %}" class="btn">
+                let's Get Started <span data-lucide="move-right" class="stroke-2 stroke-white"></span>
+            </a>
+        {% endif %} 
+    </section>
+</header>

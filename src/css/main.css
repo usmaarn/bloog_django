@@ -1,0 +1,51 @@
+/** @format */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+@import "form.css";
+@import "table.css";
+@import "dropdown.css";
+
+@import "./posts/show.css";
+
+.lucide-icons{
+  @apply w-6 h-6 stroke-1;
+}
+.lucide-icons.liked{
+  @apply stroke-[3] stroke-blue-600;
+}
+.lucide-icons.bookmarked{
+  @apply stroke-green-600 fill-green-600;
+}
+
+.ck.ck-content.ck-editor__editable{
+  @apply prose-lg;
+}
+
+.tag{
+  @apply text-gray-500 hover:underline border inline-block px-2 rounded bg-gray-100 font-semibold;
+}
+
+body{
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+a{
+  @apply hover:underline;
+}
+
+.container, .wrapper{
+  @apply max-w-screen-lg mx-auto;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

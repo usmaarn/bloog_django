@@ -1,0 +1,47 @@
+{% extends 'dashboard_layout.html' %}
+
+{% block title %} Replies {% endblock %}
+
+{% block content %}
+	<div class="flex items-center justify-between">
+        <h1 class="text-xl font-bold">Replies</h1>
+    </div>
+
+    <div class="">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" name="id" id="name" /></th>
+                    <th>Reply</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for reply in replies %}
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td class="w-64 overflow-hidden text-ellipsis whitespace-nowrap">
+                            <a href="{% url 'posts:show' reply.comment.post.slug %}#c-{{ reply.comment.id }}-r-{{ reply.id }}"
+                               class="text-blue-700 hover:underline">{{ reply.body }}</a>
+                        </td>
+                        <td>{{ reply.created_at }}</td>
+                        <td class="flex items-center gap-2">
+                            <a href="{% url 'dashboard:replies.update' reply.id %}" class="text-blue-500">Edit</a>
+                            <form action="{% url 'dashboard:replies.delete' reply.id %}" method="post">
+                                {% csrf_token %}
+                                <button onclick="return confirm('Are you sure?')" class="text-red-500">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% empty %}
+                	<tr>
+                        <td rowspan="5" class="text-center">No Replies Yet...</td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

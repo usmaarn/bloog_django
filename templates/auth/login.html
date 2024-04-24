@@ -1,0 +1,20 @@
+{% extends "layouts/public.html" %}
+
+{% block title %} Blogg | Login {% endblock title %}
+
+{% block content %}
+
+    <section class="max-w-lg mx-auto">
+        <h1 class="text-2xl font-bold">Login to Blogg</h1>
+
+        <form action="{% url 'login' %}" method="post" class="form" >
+            {% csrf_token %}
+            {{form}}
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{request.GET.next}}">
+            {% endif %}
+            <button>Login</button>
+        </form>
+    </section>
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "watch": "npx tailwindcss -i ./src/css/main.css -o ./static/css/styles.css --watch",
+    "postcss": "npx postcss -i ./src/css/main.css -o ./static/css/styles.css --watch"
+  },
+  "devDependencies": {
+    "@editorjs/embed": "^2.7.1",
+    "@editorjs/link": "^2.6.2",
+    "@editorjs/list": "^1.9.0",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.12",
+    "autoprefixer": "^10.4.19",
+    "django-vite-plugin": "^4.0.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "vite": "^5.2.10"
+  },
+  "dependencies": {
+    "@editorjs/editorjs": "^2.29.1",
+    "@editorjs/header": "^2.8.1",
+    "alpinejs": "^3.13.9",
+    "axios": "^1.6.8",
+    "editorjs-html": "^3.4.3",
+    "lucide": "^0.372.0"
+  }
+}

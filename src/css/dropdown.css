@@ -1,0 +1,27 @@
+.dropdown{
+    @apply relative;
+
+    .dropdown-wrapper{
+        @apply  absolute top-full mt-2 p-2 border rounded-lg bg-white
+        right-0 text-black min-w-44 shadow;
+
+        .dropdown-menu{
+            @apply py-1;
+
+            hr{
+                @apply my-2;
+            }
+
+            li{
+                a, button{
+                    @apply block w-full text-left px-3 py-1.5 rounded-lg hover:bg-gray-200
+                    font-semibold capitalize;
+
+                    &.logout{
+                        @apply hover:bg-red-100 text-red-600;
+                    }
+                }
+            }
+        }
+    }
+}
